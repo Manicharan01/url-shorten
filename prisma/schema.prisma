@@ -19,5 +19,5 @@ model Url {
     shortUrl  String   @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    count     BigInt   @default(autoincrement())
+    count     Int      @default(0)
 }

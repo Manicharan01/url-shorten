@@ -15,6 +15,16 @@ export async function GET(
       },
       select: {
         url: true,
+        count: true,
+      },
+    });
+
+    await prismaClient.url.update({
+      where: {
+        shortUrl: shortUrl[0],
+      },
+      data: {
+        count: (url?.count ?? 0) + 1,
       },
     });
 

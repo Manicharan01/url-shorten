@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Url" ALTER COLUMN "count" SET DEFAULT 0,
+ALTER COLUMN "count" DROP DEFAULT;
+DROP SEQUENCE "Url_count_seq";
