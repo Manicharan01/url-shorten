@@ -23,7 +23,12 @@ export async function POST(req: NextRequest) {
         url: newUrl.url,
       },
       select: {
+        id: true,
+        url: true,
         shortUrl: true,
+        createdAt: true,
+        updatedAt: true,
+        count: true,
       },
     });
 
@@ -33,14 +38,14 @@ export async function POST(req: NextRequest) {
       try {
         const newShortUrl = shortUrlSchema.parse({ shortUrl });
 
-        await prismaClient.url.create({
+        const newRow = await prismaClient.url.create({
           data: {
             url: newUrl.url,
             shortUrl: newShortUrl.shortUrl,
           },
         });
 
-        return NextResponse.json({ message: "Success" }, { status: 200 });
+        return NextResponse.json(newRow, { status: 200 });
       } catch (f) {
         console.log(f);
         return NextResponse.json(f, { status: 412 });

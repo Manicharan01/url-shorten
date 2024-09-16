@@ -10,12 +10,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { urlState } from "@/store/atoms/url";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Home() {
   const router = useRouter();
   const [url, setUrl] = useState("");
+  const [newUrl, setNewUrl] = useRecoilState(urlState);
 
   return (
     <div className="flex flex-col items-center justify-center pt-16">
@@ -50,8 +53,8 @@ export default function Home() {
               }).then((res) => {
                 res.json().then((data) => {
                   console.log(data);
-                  alert(data.message);
-                  router.push("/short");
+                  setNewUrl(data);
+                  router.push(`/short/${data.id}`);
                 });
               });
             }}
