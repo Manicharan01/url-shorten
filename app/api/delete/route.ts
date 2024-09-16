@@ -17,6 +17,8 @@ export async function DELETE(req: NextRequest) {
         shortUrl: newShortUrl.shortUrl,
       },
     });
+
+    return NextResponse.json({ message: "Success" }, { status: 200 });
   } catch (e) {
     console.log(e);
     return NextResponse.json(e, { status: 411 });

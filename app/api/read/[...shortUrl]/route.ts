@@ -1,13 +1,17 @@
 import { prismaClient } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({ params }: { params: { shortUrl: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { shortUrl: string } },
+) {
   const shortUrl = params.shortUrl;
+  console.log(shortUrl);
 
   try {
     const url = await prismaClient.url.findUnique({
       where: {
-        shortUrl,
+        shortUrl: shortUrl[0],
       },
       select: {
         url: true,
